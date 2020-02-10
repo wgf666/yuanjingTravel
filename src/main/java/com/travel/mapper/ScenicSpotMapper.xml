@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.ScenicSpotMapper">
+  <resultMap id="BaseResultMap" type="com.travel.entity.ScenicSpot">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="scenic_introduction" jdbcType="VARCHAR" property="scenicIntroduction" />
+    <result column="scenic_name" jdbcType="VARCHAR" property="scenicName" />
+    <result column="ticket_price" jdbcType="DOUBLE" property="ticketPrice" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="time" jdbcType="DATE" property="time" />
+    <result column="special" jdbcType="VARCHAR" property="special" />
+    <result column="arrange" jdbcType="VARCHAR" property="arrange" />
+    <result column="discount" jdbcType="DOUBLE" property="discount" />
+    <result column="county" jdbcType="INTEGER" property="county" />
+    <result column="publish" jdbcType="INTEGER" property="publish" />
+    <result column="searchcount" jdbcType="INTEGER" property="searchcount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, scenic_introduction, scenic_name, ticket_price, image, time, special, arrange, 
+    discount, county, publish, searchcount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scenic_spot
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scenic_spot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.travel.entity.ScenicSpot">
+    insert into scenic_spot (id, scenic_introduction, scenic_name, 
+      ticket_price, image, time, 
+      special, arrange, discount, 
+      county, publish, searchcount
+      )
+    values (#{id,jdbcType=INTEGER}, #{scenicIntroduction,jdbcType=VARCHAR}, #{scenicName,jdbcType=VARCHAR}, 
+      #{ticketPrice,jdbcType=DOUBLE}, #{image,jdbcType=VARCHAR}, #{time,jdbcType=DATE},
+      #{special,jdbcType=VARCHAR}, #{arrange,jdbcType=VARCHAR}, #{discount,jdbcType=DOUBLE}, 
+      #{county,jdbcType=INTEGER}, #{publish,jdbcType=INTEGER}, #{searchcount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.travel.entity.ScenicSpot">
+    insert into scenic_spot
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="scenicIntroduction != null">
+        scenic_introduction,
+      </if>
+      <if test="scenicName != null">
+        scenic_name,
+      </if>
+      <if test="ticketPrice != null">
+        ticket_price,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="special != null">
+        special,
+      </if>
+      <if test="arrange != null">
+        arrange,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="county != null">
+        county,
+      </if>
+      <if test="publish != null">
+        publish,
+      </if>
+      <if test="searchcount != null">
+        searchcount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scenicIntroduction != null">
+        #{scenicIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicName != null">
+        #{scenicName,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketPrice != null">
+        #{ticketPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="special != null">
+        #{special,jdbcType=VARCHAR},
+      </if>
+      <if test="arrange != null">
+        #{arrange,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=INTEGER},
+      </if>
+      <if test="publish != null">
+        #{publish,jdbcType=INTEGER},
+      </if>
+      <if test="searchcount != null">
+        #{searchcount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.travel.entity.ScenicSpot">
+    update scenic_spot
+    <set>
+      <if test="scenicIntroduction != null">
+        scenic_introduction = #{scenicIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicName != null">
+        scenic_name = #{scenicName,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketPrice != null">
+        ticket_price = #{ticketPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="special != null">
+        special = #{special,jdbcType=VARCHAR},
+      </if>
+      <if test="arrange != null">
+        arrange = #{arrange,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="county != null">
+        county = #{county,jdbcType=INTEGER},
+      </if>
+      <if test="publish != null">
+        publish = #{publish,jdbcType=INTEGER},
+      </if>
+      <if test="searchcount != null">
+        searchcount = #{searchcount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.travel.entity.ScenicSpot">
+    update scenic_spot
+    set scenic_introduction = #{scenicIntroduction,jdbcType=VARCHAR},
+      scenic_name = #{scenicName,jdbcType=VARCHAR},
+      ticket_price = #{ticketPrice,jdbcType=DOUBLE},
+      image = #{image,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE},
+      special = #{special,jdbcType=VARCHAR},
+      arrange = #{arrange,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=DOUBLE},
+      county = #{county,jdbcType=INTEGER},
+      publish = #{publish,jdbcType=INTEGER},
+      searchcount = #{searchcount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByCountry" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from scenic_spot
+    where county= #{county,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPulish" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from scenic_spot
+    where publish= #{publish,jdbcType=INTEGER}
+  </select>
+
+  <select id="getSpotPicByArrang" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from scenic_spot
+    where arrange= #{arrang,jdbcType=INTEGER}
+  </select>
+
+    <select id="getListById" resultMap="BaseResultMap" parameterType="int">
+        select * from scenic_spot where id=#{id}
+    </select>
+
+  <select id="search" resultMap="BaseResultMap">
+   SELECT
+    <include refid="Base_Column_List" />
+   from scenic_spot
+   WHERE
+    <if test="special != null">
+   special LIKE "%"#{special}"%"
+    </if>
+    <if test="county != null">
+    AND county=#{county}
+    </if>
+
+  </select>
+
+</mapper>

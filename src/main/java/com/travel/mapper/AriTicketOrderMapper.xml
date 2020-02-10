@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.AriTicketOrderMapper">
+  <resultMap id="BaseResultMap" type="com.travel.entity.AriTicketOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="start_city" jdbcType="VARCHAR" property="startCity" />
+    <result column="end_city" jdbcType="VARCHAR" property="endCity" />
+    <result column="start_time" jdbcType="DATE" property="start_time" />
+    <result column="ariline" jdbcType="VARCHAR" property="ariline" />
+    <result column="shipping_space" jdbcType="VARCHAR" property="shippingSpace" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, start_city, end_city, start_time, ariline, shipping_space, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ari_ticket_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ari_ticket_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.travel.entity.AriTicketOrder">
+    insert into ari_ticket_order (id, user_id, start_city, 
+      end_city, start_time, ariline, 
+      shipping_space, remark)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{startCity,jdbcType=VARCHAR}, 
+      #{endCity,jdbcType=VARCHAR}, #{start_time,jdbcType=DATE}, #{ariline,jdbcType=VARCHAR}, 
+      #{shippingSpace,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.travel.entity.AriTicketOrder">
+    insert into ari_ticket_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="startCity != null">
+        start_city,
+      </if>
+      <if test="endCity != null">
+        end_city,
+      </if>
+      <if test="start_time != null">
+        start_time,
+      </if>
+      <if test="ariline != null">
+        ariline,
+      </if>
+      <if test="shippingSpace != null">
+        shipping_space,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startCity != null">
+        #{startCity,jdbcType=VARCHAR},
+      </if>
+      <if test="endCity != null">
+        #{endCity,jdbcType=VARCHAR},
+      </if>
+      <if test="start_time != null">
+        #{start_time,jdbcType=DATE},
+      </if>
+      <if test="ariline != null">
+        #{ariline,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingSpace != null">
+        #{shippingSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.travel.entity.AriTicketOrder">
+    update ari_ticket_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startCity != null">
+        start_city = #{startCity,jdbcType=VARCHAR},
+      </if>
+      <if test="endCity != null">
+        end_city = #{endCity,jdbcType=VARCHAR},
+      </if>
+      <if test="start_time != null">
+        start_time = #{start_time,jdbcType=DATE},
+      </if>
+      <if test="ariline != null">
+        ariline = #{ariline,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingSpace != null">
+        shipping_space = #{shippingSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.travel.entity.AriTicketOrder">
+    update ari_ticket_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      start_city = #{startCity,jdbcType=VARCHAR},
+      end_city = #{endCity,jdbcType=VARCHAR},
+      start_time = #{start_time,jdbcType=DATE},
+      ariline = #{ariline,jdbcType=VARCHAR},
+      shipping_space = #{shippingSpace,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

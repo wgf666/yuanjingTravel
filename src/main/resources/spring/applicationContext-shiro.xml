@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- 缓存管理器 -->
+    <!--<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:spring/ehcache.xml" />
+    </bean>-->
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <!--配置realm-->
+        <!-- 配置多个Realm的登录认证 -->
+        <!--<property name="authenticator" ref="authenticator"></property>-->
+        <property name="realm" ref="BackRealm"></property>
+
+    <property name="cacheManager" ref="cacheManager"/>
+    <property name="rememberMeManager" ref="rememberMeManager"/>
+    </bean>
+
+
+        <!-- 记住我的cookie -->
+<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+<constructor-arg value="rememberMe"/>
+<property name="httpOnly" value="true"/>
+<property name="maxAge" value="604800"/><!-- 30天 -->
+</bean>
+
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
+        <property name="cipherKey"
+                  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+
+    </bean>
+
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="/back/login.jsp" />
+    </bean>
+    <!-- 配置多个Realm -->
+    <!--<bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">-->
+
+        <!--&lt;!&ndash;验证的时候，是用迭代器，所以可以认为验证的顺序就是这个 list 的顺序&ndash;&gt;-->
+        <!--<property name="realms">-->
+            <!--<list>-->
+                <!--<ref bean="otherRealm"/>-->
+                <!--<ref bean="myRealm"/>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="authenticationStrategy">-->
+
+            <!--&lt;!&ndash;所有 realm 认证通过才算登录成功&ndash;&gt;-->
+            <!--&lt;!&ndash;<bean id="authenticationStrategy" class="org.apache.shiro.authc.pam.AllSuccessfulStrategy"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;验证某个 realm 成功后直接返回，不会验证后面的 realm 了&ndash;&gt;-->
+            <!--&lt;!&ndash;<bean id="authenticationStrategy" class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;所有的 realm 都会验证，其中一个成功，也会继续验证后面的 realm，最后返回成功&ndash;&gt;-->
+            <!--<bean id="authenticationStrategy" class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--配置realm-->
+    <bean id="BackRealm" class="com.travel.realm.BackRealm">
+        <!--应用加密机制，shiro框架内部会自动从token中取到用户输入的密码进行加密，再与真实的密码进行比较-->
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <!-- 加密的算法 -->
+                <property name="hashAlgorithmName" value="MD5"></property>
+                <!--加密次数 -->
+                <property name="hashIterations" value="1024"></property>
+                <!-- 启用缓存，默认false； -->
+            </bean>
+        </property>
+    </bean>
+
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+    <bean id="secureRemoteInvocationExecutor" class="org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    <!-- Define the Shiro Filter here (as a FactoryBean) instead of directly in web.xml -
+         web.xml uses the DelegatingFilterProxy to access this bean.  This allows us
+         to wire things with more control as well utilize nice Spring things such as
+         PropertiesPlaceholderConfigurer and abstract beans or anything else we might need: -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/back/login.jsp"/>
+        <property name="filters">
+            <map>
+                <entry key="logout" value-ref="logoutFilter" />
+            </map>
+        </property>
+        <!--
+            /s/login = anon
+            左边的/s/login：表示要访问的资源
+            右边的anon:表示拦截器
+            anon:表示不需要进行登录认证就可以访问资源
+            authc:表示必需要进行登录认证才可以访问资源
+        -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--/favicon.ico = anon
+                /logo.png = anon
+                /shiro.css = anon
+                /s/login = anon
+                # allow WebStart to pull the jars for the swing app:
+                /*.jar = anon
+                # everything else requires authentication:
+                /** = authc-->
+                <!--静态资源-->
+                /css/**=anon
+                /js/**=anon
+                /images/**=anon
+                /Scripts/**=anon
+                /skin/**=anon
+                /lib/**=anon
+                <!--后台登录界面和请求-->
+                <!--/logout.action=logout-->
+                /back/login.jsp=anon
+                /back/login=anon
+                <!--验证码-->
+                /checkCode/*=anon
+                /back/checkLogin=anon
+                <!---->
+                <!--/pre/**=anon-->
+                <!--/plane/**=anon-->
+                /logout=logout
+                /back/**=user
+                /**=anon
+            </value>
+        </property>
+    </bean>
+
+</beans>

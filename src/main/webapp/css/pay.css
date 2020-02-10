@@ -1,0 +1,149 @@
+/* CSS Document */
+.pay-order {
+    width: 650px; margin:0 auto;
+}
+.pay-order h2 {
+    color: #606060;
+    font-size: 14px;
+    font-weight: bolder; margin-bottom:10px;
+}
+.pay-order .pay-way {
+    background-color: #FFFFFF;
+    border: 2px solid #8E0000;
+    padding: 19px 39px;
+}
+.pay-order .pay-way ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.pay-order .pay-way ul:before, .pay-order .pay-way ul:after {
+    content: "";
+    display: table;
+}
+.pay-order .pay-way ul:after {
+    clear: both;
+}
+.pay-order .pay-way .third-pay-wrap {
+    border-bottom: 1px dotted #C7C7C7;
+    padding-bottom: 20px; height:50px;
+}
+.pay-order .pay-way .third-pay-wrap li {
+    float: left;
+    margin-left: 100px;
+    width: 172px;
+}
+.pay-order .pay-way .third-pay-wrap li label {
+    background: url(../images/pay.png) no-repeat 0 0;
+    display: inline-block;
+    height: 41px;
+    width: 141px; vertical-align:middle;
+}
+.pay-order .pay-way .third-pay-wrap li input {
+    cursor: pointer;
+    display: inline;
+    height: 20px;
+    margin: 24px 10px 0 0;
+ /*   vertical-align: top;*/
+}
+.pay-order .pay-way .bank-pay p {
+    color: #444444;
+    margin: 10px 0; border-bottom:0; padding:0;
+}
+.pay-order .pay-way .bank-pay p a, .pay-order .pay-way .bank-pay p a:hover {
+    color: #3883BD;
+}
+.pay-order .pay-way .bank-pay li {
+    float: left;
+    margin: 10px 14px 10px 0;
+    width: 170px;
+}
+.pay-order .pay-way .bank-pay li label {
+    background: url(../images/banklist.png) no-repeat 0 0;
+    display: inline-block;
+    height: 20px;
+    width: 130px;vertical-align:middle;
+}
+.pay-order .pay-way .bank-pay li input {
+    cursor: pointer;
+    display: inline;
+    height: 20px;
+   margin: 12px 5px 0 0;
+  /*  vertical-align: top; */
+}
+.pay-order .pay-way .submit-pay .btn {
+    background: url(../images/buy-btns.png) no-repeat 0 0;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bolder;
+    height: 35px;
+    margin-right: 5px;
+    text-align: center;
+    width: 164px;
+}
+.pay-order .pay-way .submit-pay .btn:hover {
+    background-position: 0 -35px;
+}
+.pay-order .pay-way .submit-pay .grey {
+    color: #787878;
+}
+.pay-order .pay-way .third-pay-wrap li .alipay {
+    background-position: 0 0;
+}
+.pay-order .pay-way .third-pay-wrap li .tenpay {
+    background-position: 0 -41px;
+}
+.pay-order .pay-way .bank-pay li .icbc {
+    background-position: -8px -385px;
+}
+.pay-order .pay-way .bank-pay li .cmb {
+    background-position: -8px -425px;
+}
+.pay-order .pay-way .bank-pay li .cbc {
+    background-position: -8px -65px;
+}
+.pay-order .pay-way .bank-pay li .abc {
+    background-position: -8px -26px;
+}
+.pay-order .pay-way .bank-pay li .boc {
+    background-position: -8px -917px;
+}
+.pay-order .pay-way .bank-pay li .spdb {
+    background-position: -8px -638px;
+}
+.pay-order .pay-way .bank-pay li .gdb {
+    background-position: -8px -225px;
+}
+.pay-order .pay-way .bank-pay li .ceb {
+    background-position: -8px -105px;
+}
+.pay-order .pay-way .bank-pay li .cmbc {
+    background-position: -8px -145px;
+}
+.pay-order .pay-way .bank-pay li .ccb {
+    background-position: -8px -265px;
+}
+.pay-order .pay-way .bank-pay li .cib {
+    background-position: -8px -466px;
+}
+.pay-order .pay-way .bank-pay li .pab {
+    background-position: -8px -881px;
+}
+.pay-order .pay-way .bank-pay li .sdb {
+    background-position: -8px -305px;
+}
+.pay-order .pay-way .bank-pay li .cb {
+    background-position: -8px -185px;
+}
+.pay-order .pay-way .bank-pay li .bob {
+    background-position: -8px -593px;
+}
+.hide-text {
+    background-color: transparent;
+    border: 0 none;
+    color: transparent;
+    font: 0px/0 a;
+    text-shadow: none;
+}
