@@ -9,9 +9,9 @@
     <meta name="Author" content="" />
     <title>财富旅行</title>
     <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="Scripts/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="Scripts/jquery.SuperSlide.js"></script>
-    <script type="text/javascript" src="Scripts/MSClass.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.SuperSlide.js"></script>
+    <script type="text/javascript" src="/Scripts/MSClass.js"></script>
     <script type="text/javascript" language="javascript">
         var nav= '01'
     </script>
@@ -92,7 +92,7 @@
                         <option value="1">国外线路</option>
                     </select>
                 </div>
-                <script src="Scripts/jQselect.js" type="text/javascript"></script>
+                <script src="/Scripts/jQselect.js" type="text/javascript"></script>
                 <script type="text/javascript">
                     $(document).ready(function() {
                         $("#select").selectbox();
@@ -139,7 +139,7 @@
 <!--选中菜单-->
 
 <!--[if IE 6]>
-<script type="text/javascript" src="Scripts/DD_belatedPNG.js" ></script>
+<script type="text/javascript" src="/Scripts/DD_belatedPNG.js" ></script>
 <script type="text/javascript">
     DD_belatedPNG.fix('.tippic,.tips,.newsIcon,.Menu');
 </script>
@@ -328,7 +328,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="Scripts/tab.js"></script>
+        <script type="text/javascript" src="/Scripts/tab.js"></script>
         <script type="text/javascript">
             AutoTables("AutoTable1");
         </script><!---->
