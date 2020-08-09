@@ -37,11 +37,11 @@ public class OrderServiceImpl extends BaseServiceImpl<Orders> implements IOrderS
         if(pageInfo.getPageNum()==0){
             pageInfo.setPageNum(1);
             pageInfo.setPageSize(5);
+
         }
 
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
         List<Orders> bystate = ordersMapper.getBystate(state);
-
 
         return new PageInfo<>(bystate);
     }
@@ -52,6 +52,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Orders> implements IOrderS
             pageInfo.setPageNum(1);
             pageInfo.setPageSize(5);
         }
+
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
         List<Orders> list = ordersMapper.orders(id);
         return new PageInfo<>(list);
